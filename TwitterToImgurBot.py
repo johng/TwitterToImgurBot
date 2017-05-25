@@ -12,8 +12,8 @@ import time
 
 ### API ###
 
-client_id = #** commented out here because it's secret
-client_secret = #** commented out here because it's secret
+client_id = #**
+client_secret = #**
 imgur = ImgurClient(client_id, client_secret)
 authorization_url = imgur.get_auth_url('pin')
 
@@ -24,7 +24,6 @@ subreddit = reddit.subreddit("formula1")
 ## SCRAPE /r/formula1 ###
 
 for submission in subreddit.new(limit=200):
-	time.sleep(10)
 	if submission.domain == "twitter.com":
 			url = submission.url
 			page = requests.get(url)
@@ -40,6 +39,7 @@ for submission in subreddit.new(limit=200):
 			image_url = image_url.group(1)
 			
 			# UPLOAD IMAGE TO IMGUR, RETRIEVE URL ###
+			time.sleep(10)
 			ImgurImage = imgur.upload_from_url(image_url, config=None, anon=True)
 			final_url = ImgurImage['link']
 			
