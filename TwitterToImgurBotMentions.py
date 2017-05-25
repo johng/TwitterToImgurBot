@@ -24,7 +24,6 @@ subreddit = reddit.subreddit("formula1")
 ### CHECK INBOX FOR MENTIONS ###
 
 for comment in reddit.inbox.unread():
-	time.sleep(10)
 	if comment in reddit.inbox.mentions():
 		comment.mark_unread()
 		if comment.submission.domain == "twitter.com":
@@ -44,6 +43,7 @@ for comment in reddit.inbox.unread():
 			image_url = image_url.group(1)
 			
 			# UPLOAD IMAGE TO IMGUR, RETRIEVE URL ###
+			time.sleep(10)
 			ImgurImage = imgur.upload_from_url(image_url, config=None, anon=True)
 			final_url = ImgurImage['link']
 			
